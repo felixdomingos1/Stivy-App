@@ -1,0 +1,36 @@
+1-[✔]-Os usuários(profissionais de moda/membros) podem se cadastrar na aplicação 
+    como agencias de moda, fotógrafo, modelo free(não pertence a nenhuma agencia).
+
+2-[✔]-Usuário pode fazer parte de uma agências apenas.
+
+3-[✔]-Quando o usuario(profissionais de moda/membros) se inscrever em uma
+     agência, deve fazé-lo como modelo ou fotógrafo ou agencia.
+
+4-[✔]-Quando o usuario se inscrever em uma agência, perde o título de
+    free (caso era um usuário free)*
+    
+5-[✔]-As agências,modelos e fotografos postam coisas
+
+6-[]-Os posts das agencias podem ser reagidas varias vezes possíveis.
+
+7-[✔]-Os usuários(amantes de moda/visitantes) não postam.
+
+8-[]-Os usuários(amantes de moda/visitantes) podem pesquisar pelas 
+    agencias e pelos perfis dos fotógrafos e modelos.
+
+9-[]-Usuário (visitante) não cadastrado n pode reagir./
+
+10-[✔]-As agencias, Modelos e fotografos terão um perfil         
+
+11-[✔]-Cada usuário(membro)pode ver o  trabalho de outrem, tais como: Modelo, fotógrafo e agencias.
+
+12-[]-Todos os usuários teram um historial feito pela aplicação.
+     Historial do tipo. Quantas agencias trabalhou, 
+	quando entrou em cada agencia, os seus últimos eventos, etc.
+
+13-[✔]-Cada usuário deve pedir a agência para ser entegrado como um dos
+     seus membros, caso o usuário faça parte de outra agencia,
+    ele terá que abandonar uma automáticamente.
+
+14-[✔]-Cada usuário pode criar quantas agências quiser, mesmo fazendo 
+    parte de uma outra agência como modelo ou fotógrafo.

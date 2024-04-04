@@ -1,0 +1,122 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+enum status {
+  fotografoFreeLancer
+  modeloFreeLancer
+  modelo
+  fotografo
+}
+
+enum tipoGenero {
+  masculino
+  feminino
+}
+
+model Usuario {
+  id                   Int                   @id @default(autoincrement())
+  firstName            String?
+  surname              String?
+  email                String                @unique
+  password             String
+  status               status
+  img                  String?
+  aboutMe              String?
+  slogam               String?
+  genero               tipoGenero?
+  bornDate             DateTime?
+  agencia              Agencia?              @relation(fields: [agenciaId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  agenciaId            Int?
+  modeloCaracteristica ModeloCaracteristica?
+  createAt             DateTime              @default(now())
+  updatedAt            DateTime              @default(now()) @updatedAt()
+  Administrator        Administrator[]
+  Post                 Post[]
+  Notification         Notification[]
+  reactions            Reaction[]
+  comments             Comment[]
+}
+
+model ModeloCaracteristica {
+  id       Int      @id @default(autoincrement())
+  apelido  String
+  altura   Decimal
+  cintura  Decimal
+  sapato   Int
+  modelo   Usuario? @relation(fields: [modeloId], references: [id])
+  modeloId Int?     @unique
+}
+
+model Administrator {
+  id        Int     @id @default(autoincrement())
+  usuario   Usuario @relation(fields: [adminId], references: [id])
+  adminId   Int
+  agencia   Agencia @relation(fields: [agenciaId], references: [id])
+  agenciaId Int
+}
+
+model Agencia {
+  id            Int             @id @default(autoincrement())
+  nome          String          @unique
+  slogam        String
+  image         String
+  aboutUs       String
+  Administrator Administrator[]
+  createAt      DateTime        @default(now())
+  Usuario       Usuario[]
+  Post          Post[]
+  Notification  Notification[]
+}
+
+model Notification {
+  id        Int      @id @default(autoincrement())
+  descricao String
+  agenciaId Int
+  senderId  Int
+  agencia   Agencia  @relation(fields: [agenciaId], references: [id])
+  usuario   Usuario  @relation(fields: [senderId], references: [id])
+  createAt  DateTime @default(now())
+}
+
+model Post {
+  id        Int      @id @default(autoincrement())
+  content   String
+  title     String
+  img       String?
+  agencia   Agencia? @relation(fields: [agenciaId], references: [id])
+  agenciaId Int?
+  usuario   Usuario? @relation(fields: [usuarioId], references: [id])
+  usuarioId Int?
+  createAt  DateTime @default(now())
+  reactions Reaction[]
+  comment Comment[]
+}
+
+model Comment {
+  id        Int      @id @default(autoincrement())
+  content   String
+  postId    Int
+  usuarioID Int
+  usuario   Usuario @relation(fields: [usuarioID], references: [id])
+  post      Post     @relation(fields: [postId], references: [id])
+}
+
+model Reaction {
+  id     Int    @id @default(autoincrement())
+  usuario Usuario @relation(fields: [usuarioId], references: [id])
+  post   Post   @relation(fields: [postId], references: [id])
+  postId Int 
+  usuarioId Int
+}
